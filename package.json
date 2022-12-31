@@ -1,0 +1,53 @@
+{
+  "name": "event-handler",
+  "version": "0.0.1",
+  "description": "Event emitter with producers and consumers structured events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vklymniuk/event-handler.git"
+  },
+  "keywords": [
+    "nodejs",
+    "aws",
+    "pub/sub",
+    "event-emitter"
+  ],
+  "author": "Volodymyr Klymniuk <Volodymyr.Klymniuk@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vklymniuk/event-handler/issues"
+  },
+  "homepage": "https://github.com/vklymniuk/event-handler#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-flow": "^6.23.0",
+    "bluebird": "^3.7.2",
+    "chai": "^4.3.7",
+    "chai-as-promised": "^7.1.1",
+    "ci-publish": "^1.3.1",
+    "clone": "^2.1.2",
+    "co": "^4.6.0",
+    "dateformat": "^5.0.3",
+    "deep-freeze": "^0.0.1",
+    "eslint-plugin-chai-expect": "^3.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eventemitter2": "^6.4.9",
+    "faker": "^6.6.6",
+    "lodash": "^4.17.21",
+    "merge": "^2.1.1",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "redis": "^4.5.1",
+    "serialize-error": "^11.0.0",
+    "sinon": "^15.0.1",
+    "sinon-chai": "^3.7.0",
+    "stacktrace-parser": "^0.1.10",
+    "uuidv4": "^6.2.13",
+    "uuidv5": "^1.0.0",
+    "verror": "^1.10.1"
+  }
+}
