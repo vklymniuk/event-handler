@@ -1,0 +1,9 @@
+language: node_js
+
+nodejs:
+  - '18.0'
+
+before_script:
+    # - npm install
+script:
+    # - npm run test
