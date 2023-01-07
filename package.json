@@ -4,7 +4,8 @@
   "description": "Event emitter with producers and consumers structured events",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --reporter spec tests/unit_tests"
+    "unit-test": "nyc mocha --reporter spec tests/unit_tests",
+    "integration-test": "nyc mocha --reporter spec tests/integration_tests"
   },
   "repository": {
     "type": "git",
