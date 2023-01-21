@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Event emitter with producers and consumers structured events",
   "main": "index.js",
+  "author": "Volodymyr Klymniuk <Volodymyr.Klymniuk@gmail.com>",
+  "license": "MIT",
+  "type": "commonjs",
+  "homepage": "https://github.com/vklymniuk/event-handler#readme",
   "scripts": {
     "unit-test": "nyc mocha --reporter spec tests/unit_tests",
     "integration-test": "nyc mocha --reporter spec tests/integration_tests"
@@ -17,12 +21,9 @@
     "pub/sub",
     "event-emitter"
   ],
-  "author": "Volodymyr Klymniuk <Volodymyr.Klymniuk@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vklymniuk/event-handler/issues"
   },
-  "homepage": "https://github.com/vklymniuk/event-handler#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",

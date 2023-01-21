@@ -14,6 +14,7 @@ describe('context tests ->', function() {
     let contextFactory;
     let eventFactory;
     let localPubSub;
+
     beforeEach(() => {
         localPubSub = new LocalPubSub();
         eventFactory = new EventFactory();
@@ -155,6 +156,7 @@ describe('context tests ->', function() {
 
     it('Context Factory expects to throw error with name ContextParsingError when fails to create a context', async () => {
         contextFactory._eventFactory.create = sinon.stub().throws('BAD JSON');
+
         try {
             await contextFactory.create('MOCK_EVENT', undefined, {GROUP_ID: 'NO_ID'});
         }
@@ -163,6 +165,7 @@ describe('context tests ->', function() {
             expect(e.cause().name).to.be.eq('BAD JSON');
             return;
         }
+
         expect(true).to.be.false;
     });
 
@@ -179,6 +182,7 @@ describe('context tests ->', function() {
         let mergedCtx = ctx._mergeContexts({
             DEVICE_ID: 'hello'
         });
+
         expect(mergedCtx.INITIAL_EVENT_ID).to.be.eq(ctx.EVENT.INITIAL_EVENT_ID);
         expect(mergedCtx.DEVICE_ID).to.be.eq('hello');
     });
@@ -203,10 +207,12 @@ function expectChangersToThrow(generatedImmutableEvent) {
     let mockPayloadChanger = function() {
         generatedImmutableEvent.PAYLOAD.A = fakePayloadValue;
     };
+
     try {
         mockChanger();
         throw new Error('Expected mockChanger to fail!');
     } catch (e) {
+
         if (e.name != 'TypeError') {
             throw new Error('Expected mockChanger to fail!');
         }
@@ -216,10 +222,12 @@ function expectChangersToThrow(generatedImmutableEvent) {
         mockPayloadChanger();
         throw new Error('Expected mockPayloadChanger to fail!');
     } catch (e) {
+
         if (e.name != 'TypeError') {
             throw new Error('Expected mockPayloadChanger to fail!');
         }
     }
+
     expect(generatedImmutableEvent.ID).to.be.not.eq(fakeEventId);
     expect(generatedImmutableEvent.PAYLOAD.A).to.be.not.eq(fakePayloadValue);
 }
