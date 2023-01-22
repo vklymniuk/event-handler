@@ -122,6 +122,7 @@ describe('context tests ->', function() {
         sinon.spy(localPubSub, 'publish');
         let anotherMockEventName = 'ANOTHER_MOCK_EVENT';
         await mockContext.emitEvent(anotherMockEventName);
+        
         expect(localPubSub.publish.args[0][0]).to.be.eq(anotherMockEventName);
     });
 
