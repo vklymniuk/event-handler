@@ -34,11 +34,10 @@ describe('context tests ->', function() {
 
     it('Creating context expects to include (decorate) EVENT from factory with payload', async () => {
         let mockEventName = 'MOCK_EVENT';
-        let mockPayload = {
-            hello: 'world'
-        }
+        let mockPayload = { hello: 'vovan'}
         sinon.spy(eventFactory, 'create');
         let mockContext = await contextFactory.create(mockEventName, mockPayload, {GROUP_ID: 'NO_ID'});
+
         expect(mockContext.EVENT).to.be.not.undefined;
         expect(mockContext.EVENT.ID).to.be.not.undefined;
         expect(mockContext.EVENT.PAYLOAD).to.be.not.undefined;
@@ -54,6 +53,7 @@ describe('context tests ->', function() {
         sinon.spy(mockContext._contextFactory._eventFactory, 'create');
         sinon.spy(localPubSub, 'publish');
         await mockContext.emitEvent(anotherMockEventName);
+
         expect(localPubSub.publish.calledOnce).to.be.true;
         expect(mockContext._contextFactory._eventFactory.create.calledOnce).to.be.true;
         expect(mockContext._contextFactory._eventFactory.create.calledWith(anotherMockEventName)).to.be.true;
@@ -64,6 +64,7 @@ describe('context tests ->', function() {
         let mockContext = await contextFactory.create(mockEventName, undefined, {GROUP_ID: 'NO_ID'});
         let anotherMockEventName = 'ANOTHER_MOCK_EVENT';
         let anotherMockContext = await mockContext.emitEvent(anotherMockEventName);
+
         expect(anotherMockContext).to.be.instanceOf(Context);
         expect(anotherMockContext.EVENT.NAME).to.be.eq(anotherMockEventName);
     });
@@ -78,6 +79,7 @@ describe('context tests ->', function() {
             hello: 'world'
         }
         await mockContext.emitEvent(anotherMockEventName, mockPayload);
+
         expect(localPubSub.publish.calledOnce).to.be.true;
         expect(mockContext._contextFactory._eventFactory.create.calledOnce).to.be.true;
         expect(mockContext._contextFactory._eventFactory.create.calledWith(anotherMockEventName, mockPayload)).to.be.true;
@@ -99,6 +101,7 @@ describe('context tests ->', function() {
         sinon.spy(localPubSub, 'publish');
         let anotherMockEventName = 'ANOTHER_MOCK_EVENT';
         await mockContext.emitEvent(anotherMockEventName);
+
         expect(localPubSub.publish.calledOnce).to.be.true;
         expect(localPubSub.publish.args[0][1].NAME).to.be.not.undefined;
     });
@@ -156,7 +159,6 @@ describe('context tests ->', function() {
 
     it('Context Factory expects to throw error with name ContextParsingError when fails to create a context', async () => {
         contextFactory._eventFactory.create = sinon.stub().throws('BAD JSON');
-
         try {
             await contextFactory.create('MOCK_EVENT', undefined, {GROUP_ID: 'NO_ID'});
         }
@@ -165,7 +167,6 @@ describe('context tests ->', function() {
             expect(e.cause().name).to.be.eq('BAD JSON');
             return;
         }
-
         expect(true).to.be.false;
     });
 
@@ -182,7 +183,6 @@ describe('context tests ->', function() {
         let mergedCtx = ctx._mergeContexts({
             DEVICE_ID: 'hello'
         });
-
         expect(mergedCtx.INITIAL_EVENT_ID).to.be.eq(ctx.EVENT.INITIAL_EVENT_ID);
         expect(mergedCtx.DEVICE_ID).to.be.eq('hello');
     });
@@ -207,12 +207,10 @@ function expectChangersToThrow(generatedImmutableEvent) {
     let mockPayloadChanger = function() {
         generatedImmutableEvent.PAYLOAD.A = fakePayloadValue;
     };
-
     try {
         mockChanger();
         throw new Error('Expected mockChanger to fail!');
     } catch (e) {
-
         if (e.name != 'TypeError') {
             throw new Error('Expected mockChanger to fail!');
         }
@@ -222,12 +220,10 @@ function expectChangersToThrow(generatedImmutableEvent) {
         mockPayloadChanger();
         throw new Error('Expected mockPayloadChanger to fail!');
     } catch (e) {
-
         if (e.name != 'TypeError') {
             throw new Error('Expected mockPayloadChanger to fail!');
         }
     }
-
     expect(generatedImmutableEvent.ID).to.be.not.eq(fakeEventId);
     expect(generatedImmutableEvent.PAYLOAD.A).to.be.not.eq(fakePayloadValue);
 }
