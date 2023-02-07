@@ -1,5 +1,5 @@
 'use strict';
-require('./00_init.js');
+require('./bootstrap.js');
 var _ = require('lodash');
 var expect = global.expect;
 const Bluebird = require('bluebird');

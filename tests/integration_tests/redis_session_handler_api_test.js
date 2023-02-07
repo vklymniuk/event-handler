@@ -1,5 +1,5 @@
 'use strict';
-require('./bootstrap');
+require('./bootstrap.js');
 
 const RedisSessionHandlerAPI = require('../../lib/redis_session_handler_api');
 const MockContextFactory = require('../../lib/mock_context_factory');

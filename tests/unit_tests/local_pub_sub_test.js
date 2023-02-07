@@ -1,8 +1,10 @@
 'use strict';
-require('./00_init.js');
+require('./bootstrap.js');
+
 var sinon = global.sinon;
 var _ = require('lodash');
 var expect = global.expect;
+
 const EventHandler = require('../../lib/event_handler.js');
 const LocalPubSub = require('../../lib/local_pub_sub.js');
 const Bluebird = require('bluebird');
@@ -47,8 +49,13 @@ describe('Local pub sub test -> ', () => {
             await Bluebird.delay(1);
             isEvent = _.has(event, 'NAME');
         });
+
         localPubSub.subscribe('ANY', mockFunction);
-        await eventHandler._contextFactory.create(mockEventName, undefined, {GROUP_ID: 'NO_ID'});
+        await eventHandler._contextFactory.create(
+            mockEventName, 
+            undefined, 
+            {GROUP_ID: 'NO_ID'}
+        );
         await Bluebird.delay(2);
         expect(isEvent).to.be.true;
         expect(mockFunction.calledOnce).to.be.true;
@@ -68,10 +75,11 @@ describe('Local pub sub test -> ', () => {
     it('onContext expects to invoke callback with context', async () => {
         let mockContext = {
             EVENT: {
-                NAME: 'MOCK_EVENT'
+                NAME: 'MOCK_EVENT',
             },
-            RESPONSE: {}
+            RESPONSE: {},
         }
+
         let cb = sinon.stub().resolves();
         localPubSub.subscribe(mockContext.EVENT.NAME, cb);
         await localPubSub.onContext(mockContext);
@@ -82,7 +90,10 @@ describe('Local pub sub test -> ', () => {
     class BL1 extends EventHandler {
 
         _initEventHandlers() {
-            this.registerEventHandler('STARTED', this.handleStarted.bind(this));
+            this.registerEventHandler(
+                'STARTED', 
+                this.handleStarted.bind(this)
+            );
         }
 
         handleStarted(ctx) {
@@ -93,7 +104,10 @@ describe('Local pub sub test -> ', () => {
 
     class BL2 extends EventHandler {
         _initEventHandlers() {
-            this.registerEventHandler('ENDED', this.handleEnded.bind(this));
+            this.registerEventHandler(
+                'ENDED', 
+                this.handleEnded.bind(this)
+            );
         }
 
         handleEnded() {

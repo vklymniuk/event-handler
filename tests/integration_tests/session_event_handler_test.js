@@ -1,5 +1,5 @@
 'use strict';
-require('./bootstrap');
+require('./bootstrap.js');
 
 const RedisSessionHandlerAPI = require('../../lib/redis_session_handler_api');
 const EventHandler = require('../../lib/event_handler');

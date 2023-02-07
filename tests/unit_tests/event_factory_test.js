@@ -1,5 +1,5 @@
 'use strict';
-require('./00_init.js');
+require('./bootstrap.js');
 const sinon = global.sinon;
 const _ = require('lodash');
 const expect = global.expect;
@@ -17,7 +17,7 @@ describe('Event creation tests', function() {
     let mockEventType = 'MOCK_EVENT';
     let mockPayload = {
         A: 'a',
-        B: 'b'
+        B: 'b',
     };
 
     let mockPreviousEvent = {
@@ -27,7 +27,7 @@ describe('Event creation tests', function() {
         TIMESTAMP: Date.now() - 1000,
         payload: {
             K: 'k',
-            J: 'j'
+            J: 'j',
         },
         GROUP_ID: 'NO_ID'
     };
@@ -38,7 +38,7 @@ describe('Event creation tests', function() {
         OS: 'A',
         OS_VERSION: '18.04',
         APP_NAME: 'BL',
-        APP_VERSION: '0.0.2'
+        APP_VERSION: '0.0.2',
     }
 
     beforeEach(() => {
@@ -62,7 +62,7 @@ describe('Event creation tests', function() {
             a: null,
             b: undefined,
             c: 'value',
-            d: false
+            d: false,
         });
         expect(_.has(valueOnlyFields, 'a')).to.be.false;
         expect(_.has(valueOnlyFields, 'b')).to.be.false;
@@ -119,7 +119,7 @@ describe('Event creation tests', function() {
             USER_ID: 'USER_ID',
             DEVICE_ID: 'DEVICE_ID',
             GROUP_ID: 'GROUP_ID',
-            INITIAL_EVENT_ID: 'INITIAL_EVENT_ID'
+            INITIAL_EVENT_ID: 'INITIAL_EVENT_ID',
         }
         let event = eventFactory._createEventContext(mockEventContext);
         expect(event.USER_ID).to.be.eq('USER_ID');
@@ -253,7 +253,7 @@ describe('Event ID idempotent tests -->', function() {
         OS: 'A',
         OS_VERSION: '18.04',
         APP_NAME: 'BL',
-        APP_VERSION: '0.0.2'
+        APP_VERSION: '0.0.2',
     }
 
     beforeEach(() => {
@@ -270,6 +270,7 @@ describe('Event ID idempotent tests -->', function() {
     it('expect that an event with the same Context, the same Name and the same Payload to will always has the same ID', () => {
         let initialEventId = uuidv4();
         let eventA = eventFactory.create('EVENT_A', { hello: 'world'}, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
+
         for (let i = 0 ; i < 100 ; i++) {
             let eventB = eventFactory.create('EVENT_A', { hello: 'world'}, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
             expect(eventA.INITIAL_EVENT_ID).to.be.eq(eventB.INITIAL_EVENT_ID);
@@ -280,6 +281,7 @@ describe('Event ID idempotent tests -->', function() {
     it('expect that an event with the same Context, the same Name and empty Payload to will always has the same ID', () => {
         let initialEventId = uuidv4();
         let eventA = eventFactory.create('EVENT_A', {}, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
+
         for (let i = 0 ; i < 100 ; i++) {
             let eventB = eventFactory.create('EVENT_A', {}, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
             expect(eventA.INITIAL_EVENT_ID).to.be.eq(eventB.INITIAL_EVENT_ID);
@@ -290,6 +292,7 @@ describe('Event ID idempotent tests -->', function() {
     it('expect that an event with the same Context, the same Name and undefined Payload to will always has the same ID', () => {
         let initialEventId = uuidv4();
         let eventA = eventFactory.create('EVENT_A', undefined, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
+
         for (let i = 0; i < 100 ; i++ ) {
             let eventB = eventFactory.create('EVENT_A', undefined, {GROUP_ID: 'A', INITIAL_EVENT_ID: initialEventId});
             expect(eventA.INITIAL_EVENT_ID).to.be.eq(eventB.INITIAL_EVENT_ID);
@@ -336,7 +339,7 @@ describe('Payload parsing tests ->', function() {
     let mockEventType = 'MOCK_EVENT';
     let mockPayload = {
         A: 'a',
-        B: 'b'
+        B: 'b',
     };
 
     beforeEach(() => {

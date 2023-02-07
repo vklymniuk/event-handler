@@ -1,5 +1,5 @@
 'use strict';
-require('./00_init.js');
+require('./bootstrap.js');
 const MockContextFactory = require('../../lib/mock_context_factory');
 const co = require('co');
 const Bluebird = require('bluebird');

@@ -1,8 +1,10 @@
 'use strict';
-require('./00_init.js');
+require('./bootstrap.js');
+
 const sinon = global.sinon;
 const _ = require('lodash');
 const expect = global.expect;
+
 const ContextFactory = require('../../lib/context_factory.js');
 const Context = require('../../lib/context.js');
 const EventFactory = require('../../lib/event_factory.js');
@@ -24,7 +26,14 @@ describe('context tests ->', function() {
     it('Creating context expects to include (decorate) EVENT from factory without payload', async () => {
         let mockEventName = 'MOCK_EVENT';
         sinon.spy(eventFactory, 'create');
-        let mockContext = await contextFactory.create(mockEventName, undefined, {GROUP_ID: 'NO_ID'});
+        let mockContext = await contextFactory.create(
+            mockEventName, 
+            undefined, 
+            {
+                GROUP_ID: 'NO_ID'
+            }
+        );
+
         expect(mockContext.EVENT).to.be.not.undefined;
         expect(mockContext.EVENT.ID).to.be.not.undefined;
         expect(mockContext.EVENT.PAYLOAD).to.be.undefined;
@@ -36,7 +45,13 @@ describe('context tests ->', function() {
         let mockEventName = 'MOCK_EVENT';
         let mockPayload = { hello: 'vovan'}
         sinon.spy(eventFactory, 'create');
-        let mockContext = await contextFactory.create(mockEventName, mockPayload, {GROUP_ID: 'NO_ID'});
+        let mockContext = await contextFactory.create(
+            mockEventName, 
+            mockPayload, 
+            {
+                GROUP_ID: 'NO_ID'
+            }
+        );
 
         expect(mockContext.EVENT).to.be.not.undefined;
         expect(mockContext.EVENT.ID).to.be.not.undefined;
