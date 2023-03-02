@@ -42,7 +42,11 @@ describe('Redis Session Handler integration tests', function () {
 
     it('TestCase #2', async () => {
         let key = uuidv4();
-        let mockContext = MockContextFactory.create('MOCK_EVENT_REPLIED', {hello:'world'}, {GROUP_ID:'test'});
+        let mockContext = MockContextFactory.create(
+            'MOCK_EVENT_REPLIED', 
+            { hello:'world' }, 
+            { GROUP_ID:'test' }
+        );
         let equal = false;
 
         co(async () => {

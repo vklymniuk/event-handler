@@ -9,7 +9,9 @@
   "homepage": "https://github.com/vklymniuk/event-handler#readme",
   "scripts": {
     "unit-test": "nyc mocha --reporter spec tests/unit_tests",
-    "integration-test": "nyc mocha --reporter spec tests/integration_tests"
+    "integration-test": "nyc mocha --reporter spec tests/integration_tests",
+    "ci-publish": "ci-publish",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
   },
   "repository": {
     "type": "git",

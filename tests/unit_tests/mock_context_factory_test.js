@@ -1,11 +1,14 @@
 'use strict';
 require('./bootstrap.js');
-const MockContextFactory = require('../../lib/mock_context_factory');
-const co = require('co');
+
 const Bluebird = require('bluebird');
+const MockContextFactory = require('../../lib/mock_context_factory');
+
+const co = require('co');
 const _ = require('lodash');
 
 const Context = require('../../lib/context');
+
 describe('Mock Context Factory tests -> ', function() {
 
     it('create expects to create context', () => {

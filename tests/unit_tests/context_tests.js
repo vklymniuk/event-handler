@@ -30,8 +30,8 @@ describe('context tests ->', function() {
             mockEventName, 
             undefined, 
             {
-                GROUP_ID: 'NO_ID'
-            }
+                GROUP_ID: 'NO_ID',
+            },
         );
 
         expect(mockContext.EVENT).to.be.not.undefined;
@@ -49,8 +49,8 @@ describe('context tests ->', function() {
             mockEventName, 
             mockPayload, 
             {
-                GROUP_ID: 'NO_ID'
-            }
+                GROUP_ID: 'NO_ID',
+            },
         );
 
         expect(mockContext.EVENT).to.be.not.undefined;
@@ -91,8 +91,8 @@ describe('context tests ->', function() {
         let anotherMockEventName = 'ANOTHER_MOCK_EVENT';
         sinon.spy(mockContext._contextFactory._eventFactory, 'create');
         let mockPayload = {
-            hello: 'world'
-        }
+            hello: 'world',
+        };
         await mockContext.emitEvent(anotherMockEventName, mockPayload);
 
         expect(localPubSub.publish.calledOnce).to.be.true;
@@ -145,8 +145,8 @@ describe('context tests ->', function() {
         let mockEvent = {
             NAME: 'A',
             PAYLOAD: {
-                hello: 'world'
-            }
+                hello: 'world',
+            },
         };
         let ctx = contextFactory.from(mockEvent);
         expect(ctx.EVENT).to.be.not.undefined;
@@ -157,8 +157,8 @@ describe('context tests ->', function() {
         let mockEvent = {
             NAME: 'A',
             PAYLOAD: {
-                hello: 'world'
-            }
+                hello: 'world',
+            },
         };
         let ctx = contextFactory.from(mockEvent);
         expectChangersToThrow(ctx.EVENT);
@@ -193,7 +193,7 @@ describe('context tests ->', function() {
 
     it('_mergeContexts is expected to return the context of the original event, added DEVICE_ID', () => {
         let mockPayload = {
-            hello: 'world'
+            hello: 'world',
         }
         let ctx = MockContextFactory.create('MOCK_EVENT', mockPayload, {GROUP_ID:'BACKEND'});
         let mergedCtx = ctx._mergeContexts({
@@ -205,7 +205,7 @@ describe('context tests ->', function() {
 
     it('_mergeContexts is expected to return the original event when input is undefined', () => {
         let mockPayload = {
-            hello: 'world'
+            hello: 'world',
         }
         let ctx = MockContextFactory.create('MOCK_EVENT', mockPayload, {GROUP_ID:'BACKEND'});
         let mergedCtx = ctx._mergeContexts();

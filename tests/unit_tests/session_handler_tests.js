@@ -1,5 +1,6 @@
 'use strict';
 require('./bootstrap.js');
+
 const EventHandler = require('../../lib/event_handler');
 const LocalPubSub = require('../../lib/local_pub_sub');
 const LocalSessionHandlerAPI = require('../../lib/local_session_handler_api');
